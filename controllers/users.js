@@ -29,9 +29,10 @@ module.exports = {
     res.status(201).json({ token })
   },
   signIn: async (req, res, next) => {
-    console.log('UsersController signin called')
+    const token = signToken(req.user) // generate token
+    res.status(200).json({ token })
   },
   secret: async (req, res, next) => {
-    console.log('UsersController secret called')
+    res.json({ secret: 'resource' })
   }
 }
