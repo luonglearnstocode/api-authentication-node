@@ -1,8 +1,16 @@
 const express = require('express')
 const morgan = require('morgan')
 const bodyParser = require('body-parser')
+const mongoose = require('mongoose')
 
 const app = express()
+
+// connect to database
+const env = app.get('env')
+const config = require('./config')[env]
+const uri = `mongodb://${config.database.user}:${config.database.pass}@${config.database.host}:${config.database.port}/${config.database.db}`
+mongoose.connect(uri, { useNewUrlParser: true })
+mongoose.set('useCreateIndex', true)
 
 // ================================================
 // Middleware
